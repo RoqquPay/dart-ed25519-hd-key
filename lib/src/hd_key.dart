@@ -41,10 +41,10 @@ class _ED25519HD {
           {String masterSecret = ED25519_CURVE}) =>
       _getKeys(seedBytes, utf8.encode(masterSecret));
 
-  Future<List<int>> getPublicKey(List<int> privateKey,
-      [bool withZeroByte = true]) async {
-    final signature = await SigningKey.fromSeed(Uint8List.fromList(privateKey));
-    final publicKey = await signature.publicKey;
+  List<int> getPublicKey(List<int> privateKey,
+      [bool withZeroByte = true]) {
+    final signature = SigningKey.fromSeed(Uint8List.fromList(privateKey));
+    final publicKey = signature.publicKey;
 
     if (withZeroByte == true) {
       List<int> dataBytes = List.filled(33, 0);
